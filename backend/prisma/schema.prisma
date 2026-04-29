@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Pret_bancaire {
+  num_compte String   @id
+  nom_client String
+  nom_banque String
+  montant    Float
+  date_pret  DateTime
+  taux_pret  Float
+}
