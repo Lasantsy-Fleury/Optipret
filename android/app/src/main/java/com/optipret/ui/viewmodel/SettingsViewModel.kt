@@ -106,7 +106,7 @@ class SettingsViewModel(
 }
 
 data class SettingsUiState(
-  val apiUrl: String = "http://10.0.2.2:3000",
+  val apiUrl: String = "https://optipret-backend.onrender.com",
   val selectedCurrency: CurrencyOption = CurrencyOption.ARIARY,
   val offlineMode: Boolean = false,
   val connectionStatus: ConnectionStatus = ConnectionStatus.Unknown,

@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 private const val DATASTORE_NAME = "settings"
-private const val DEFAULT_API_URL = "http://10.0.2.2:3000"
+private const val DEFAULT_API_URL = "https://optipret-backend.onrender.com"
 private const val DEFAULT_CURRENCY = "ARIARY"
 
 private val Context.dataStore by preferencesDataStore(name = DATASTORE_NAME)

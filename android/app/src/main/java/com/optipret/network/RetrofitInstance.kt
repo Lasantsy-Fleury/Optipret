@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitInstance {
-  private const val DEFAULT_BASE_URL = "http://10.0.2.2:3000/"
+  private const val DEFAULT_BASE_URL = "https://optipret-backend.onrender.com/"
   private const val TIMEOUT_SECONDS = 30L
 
   @Volatile
