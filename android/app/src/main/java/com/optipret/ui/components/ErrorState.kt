@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,7 +17,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ErrorState(message: String, modifier: Modifier = Modifier) {
+fun ErrorState(
+  message: String,
+  modifier: Modifier = Modifier,
+  actionLabel: String = "Reessayer",
+  onAction: (() -> Unit)? = null
+) {
   Column(
     modifier = modifier,
     horizontalAlignment = Alignment.CenterHorizontally
@@ -43,5 +49,12 @@ fun ErrorState(message: String, modifier: Modifier = Modifier) {
       color = Color(0xFFDC2626),
       style = MaterialTheme.typography.bodyMedium
     )
+
+    if (onAction != null) {
+      Spacer(modifier = Modifier.height(8.dp))
+      TextButton(onClick = onAction) {
+        Text(text = actionLabel)
+      }
+    }
   }
 }

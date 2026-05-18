@@ -137,7 +137,10 @@ fun StatisticsScreen(
 
             if (uiState.errorMessage != null) {
                 Spacer(modifier = Modifier.height(12.dp))
-                ErrorState(message = uiState.errorMessage ?: "Une erreur est survenue lors du chargement des analyses.")
+                ErrorState(
+                    message = uiState.errorMessage ?: "Une erreur est survenue lors du chargement des analyses.",
+                    onAction = { viewModel.refresh(force = true) }
+                )
             }
         }
 

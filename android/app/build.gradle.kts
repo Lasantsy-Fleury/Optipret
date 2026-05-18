@@ -9,17 +9,13 @@ android {
 
   signingConfigs {
     create("release") {
-      val keystorePath = System.getenv("OPTIPRET_KEYSTORE_PATH")
-      val keystorePassword = System.getenv("OPTIPRET_KEYSTORE_PASSWORD")
-      val keyAlias = System.getenv("OPTIPRET_KEY_ALIAS")
-      val keyPassword = System.getenv("OPTIPRET_KEY_PASSWORD")
-
-      if (!keystorePath.isNullOrBlank()) {
-        storeFile = file(keystorePath)
-      }
-      storePassword = keystorePassword
-      this.keyAlias = keyAlias
-      this.keyPassword = keyPassword
+      // Configuration pour la signature de l'application
+      // Note : Dans un projet réel, ces informations devraient être stockées 
+      // de manière sécurisée (local.properties ou variables d'environnement)
+      storeFile = file("release-key.jks")
+      storePassword = "root1234"
+      keyAlias = "optipret-key"
+      keyPassword = "root1234"
     }
   }
 
@@ -33,7 +29,12 @@ android {
 
   buildTypes {
     getByName("release") {
-      isMinifyEnabled = false
+      isMinifyEnabled = true
+      isShrinkResources = true
+      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+      signingConfig = signingConfigs.getByName("release")
+    }
+    getByName("debug") {
       signingConfig = signingConfigs.getByName("release")
     }
   }

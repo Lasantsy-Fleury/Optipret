@@ -284,7 +284,7 @@ fun HomeScreen(
         }
         errorMessage != null -> {
           Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            ErrorState(message = errorMessage)
+            ErrorState(message = errorMessage, onAction = onRefresh)
           }
         }
         filteredLoans.isEmpty() -> {
