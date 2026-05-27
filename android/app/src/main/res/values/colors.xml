@@ -6,4 +6,5 @@
     <color name="google_yellow">#FBBC05</color>
     <color name="google_green">#34A853</color>
     <color name="brand_blue_dark">#1967D2</color>
+    <color name="splash_background">#FFFFFF</color>
 </resources>

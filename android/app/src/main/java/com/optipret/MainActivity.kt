@@ -1,9 +1,13 @@
 package com.optipret
 
 import android.graphics.Color as AndroidColor
+import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.core.animation.doOnEnd
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
@@ -20,10 +24,18 @@ import com.optipret.ui.viewmodel.StatisticsViewModel
 
 class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
+    val splashScreen = installSplashScreen()
     super.onCreate(savedInstanceState)
 
     WindowCompat.setDecorFitsSystemWindows(window, false)
     window.statusBarColor = AndroidColor.TRANSPARENT
+
+    splashScreen.setOnExitAnimationListener { splashScreenView ->
+      val fadeOut = ObjectAnimator.ofFloat(splashScreenView.view, View.ALPHA, 1f, 0f)
+      fadeOut.duration = 300L
+      fadeOut.doOnEnd { splashScreenView.remove() }
+      fadeOut.start()
+    }
 
     setContent {
       AppTheme {

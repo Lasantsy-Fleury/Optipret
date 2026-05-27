@@ -68,6 +68,7 @@ dependencies {
   implementation(platform("androidx.compose:compose-bom:2024.06.00"))
 
   implementation("androidx.core:core-ktx:1.13.1")
+  implementation("androidx.core:core-splashscreen:1.0.1")
   implementation("androidx.activity:activity-compose:1.9.0")
   implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.3")
   implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.3")
@@ -79,6 +80,9 @@ dependencies {
   implementation("androidx.compose.material:material")
   implementation("androidx.compose.material:material-icons-extended")
   implementation("androidx.navigation:navigation-compose:2.7.7")
+
+  // Added Material Components for Android dependency to provide XML themes
+  implementation("com.google.android.material:material:1.12.0")
 
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 

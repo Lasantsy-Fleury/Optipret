@@ -21,6 +21,10 @@ class SettingsViewModel(
 
   init {
     viewModelScope.launch {
+      dataStore.ensureDefaultApiUrlIfNeeded()
+    }
+
+    viewModelScope.launch {
       combine(
         dataStore.apiUrlFlow,
         dataStore.currencyFlow,

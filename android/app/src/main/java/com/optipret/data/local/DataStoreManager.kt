@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 private const val DATASTORE_NAME = "settings"
@@ -18,6 +19,7 @@ private val Context.dataStore by preferencesDataStore(name = DATASTORE_NAME)
 class DataStoreManager(private val context: Context) {
   private object Keys {
     val apiUrl = stringPreferencesKey("api_url")
+    val apiUrlMigrated = booleanPreferencesKey("api_url_migrated")
     val currency = stringPreferencesKey("currency")
     val offlineMode = booleanPreferencesKey("offline_mode")
   }
@@ -37,6 +39,19 @@ class DataStoreManager(private val context: Context) {
   suspend fun setApiUrl(value: String) {
     context.dataStore.edit { prefs ->
       prefs[Keys.apiUrl] = value
+    }
+  }
+
+  suspend fun ensureDefaultApiUrlIfNeeded() {
+    val prefs = context.dataStore.data.first()
+    val migrated = prefs[Keys.apiUrlMigrated] ?: false
+    val current = prefs[Keys.apiUrl]
+
+    if (!migrated && current != DEFAULT_API_URL) {
+      context.dataStore.edit { edit ->
+        edit[Keys.apiUrl] = DEFAULT_API_URL
+        edit[Keys.apiUrlMigrated] = true
+      }
     }
   }
 
